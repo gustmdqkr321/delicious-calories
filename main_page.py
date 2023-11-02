@@ -2,11 +2,12 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 from image_upload import ImageUploaderApp
-# from login import LoginApp
+
+# 밑에 두개로 만들기
 # from profile_edit import ProfileEditApp
 # from calendar_viewer import CalendarViewerApp
 
-class MainMenuApp(QMainWindow):
+class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메뉴 선택 순서
     def __init__(self):
         super().__init__()
 
@@ -38,9 +39,9 @@ class MainMenuApp(QMainWindow):
     def show_image_uploader(self):
         self.image_uploader = ImageUploaderApp()
         self.image_uploader.show()
-
+    # 밑에 두개에 연동 시키기
     def show_profile_editor(self):
-        self.profile_editor = ProfileEditApp()
+        self.profile_editor = ProfileEditApp() 
         self.profile_editor.show()
 
     def show_calendar_viewer(self):

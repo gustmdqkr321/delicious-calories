@@ -41,8 +41,7 @@ class LoginApp(QMainWindow):
         username = self.username_input.text()
         password = self.password_input.text()
 
-        # 여기에서 로그인 로직을 구현하세요
-        # CSV 파일에서 사용자 정보를 확인하고 로그인 여부를 판단하세요
+        # CSV 파일에서 사용자 정보 확인
         if self.check_credentials(username, password):
             print("로그인 성공")
         else:
@@ -52,13 +51,12 @@ class LoginApp(QMainWindow):
         username = self.username_input.text()
         password = self.password_input.text()
 
-        # 여기에서 회원가입 로직을 구현하세요
-        # 사용자 정보를 CSV 파일에 저장하세요
+        # 회원가입
         self.save_to_csv(username, password)
         print("회원가입 완료")
 
     def check_credentials(self, username, password):
-        # 여기에서 CSV 파일에서 사용자 정보를 확인하고 로그인 여부를 판단하세요
+        # 파일 경로
         with open('user_info.csv', 'r') as file:
             csv_reader = csv.reader(file)
             for row in csv_reader:
@@ -67,7 +65,7 @@ class LoginApp(QMainWindow):
         return False
 
     def save_to_csv(self, username, password):
-        # 사용자 정보를 CSV 파일에 저장하세요
+        # 저장
         with open('user_info.csv', 'a', newline='') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow([username, password])
