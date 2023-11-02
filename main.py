@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPu
 from image_upload import ImageUploaderApp
 from login import LoginApp
 # from profile_edit import ProfileEditApp
-# from calendar_viewer import CalendarViewerApp
+# from calendar_viewer import CalendarViewerApp 
 from main_page import MainMenuApp
 
 class MainApp(QApplication):

@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushB
 from image_upload import ImageUploaderApp
 
 # 밑에 두개로 만들기
-# from profile_edit import ProfileEditApp
+from profile_edit import ProfileEditApp
 # from calendar_viewer import CalendarViewerApp
 
 class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메뉴 선택 순서
