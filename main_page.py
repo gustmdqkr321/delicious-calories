@@ -2,9 +2,9 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 from image_upload import ImageUploaderApp
-
-# 밑에 두개로 만들기
 from profile_edit import ProfileEditApp
+
+# 캘린더 뷰 추가해서 연결하기
 # from calendar_viewer import CalendarViewerApp
 
 class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메뉴 선택 순서
