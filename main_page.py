@@ -49,6 +49,7 @@ class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메�
         self.calendar_viewer.show()
 
 if __name__ == '__main__':
-    app = MainApp(sys.argv)
-    app.login_app.show()
+    app = QApplication(sys.argv)
+    window = MainMenuApp()
+    window.show()
     sys.exit(app.exec_())
