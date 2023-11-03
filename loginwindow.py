@@ -1,5 +1,5 @@
 import mysql.connector
-from PyQt5.QtWidgets import QDialog, QApplication, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QDialog, QApplication, QVBoxLayout, QWidget, QMessageBox
 # from PyQt5.uic import loadUi
 from login_ui import Ui_Form as loginUI
 from createacc_ui import Ui_Form as createaccUI
@@ -44,18 +44,20 @@ class CreateAccountWindow(QDialog):
         # MySQL 연동 및 회원가입 정보 저장
         try:
             conn = mysql.connector.connect(
-                host="localhost",
-                user="yourusername",
-                password="yourpassword",
-                database="yourdatabase"
+                host= "localhost",
+                user= "delicious_admin",
+                password= "123123123",
+                database= "delicious_calories_db"
             )
             cursor = conn.cursor()
-            query = "INSERT INTO users (email, password) VALUES (%s, %s)"
-            data = (email, password)
+            query = "INSERT INTO users (username, email, password) VALUES (%s, %s, %s)"
+            data = (name, email, password)
             cursor.execute(query, data)
             conn.commit()
             conn.close()
             print(f"Successfully created account with email: {email} and password: {password}")
+            QMessageBox.information(self, "Success", "Successfully created account!")
         except mysql.connector.Error as error:
             print("Failed to insert record into MySQL table:", error)
+            QMessageBox.information(self, "Failed", "Failed to create account, try again!")
 

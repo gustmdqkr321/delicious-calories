@@ -50,3 +50,50 @@ pyuic5 -x your_ui_file.ui -o output_py_file.py
 http://localhost/phpmyadmin
 ````
 
+사이트 접속시 
+
+```
+Forbidden
+You don't have permission to access this resource.
+
+Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4 Server at localhost Port 80
+```
+
+에러 발생
+
+ㅠㅠ xampp 삭제하고 다시 phpmyadmin 추가해서 설치해보기
+
+[참고](https://blog.containerize.com/ko/how-to-setup-xampp-and-phpmyadmin-as-localhost-on-windows/)
+
+```
+우리 앱은 사용자가 음식 사진을 찍으면 칼로리 정보를 신속하게 제공하고, 개인 건강을 
+관리하기 위한 캘린더 형태의 건강을 케어 도우미입니다. 캘린더 기능을 통해 사용자가 
+자신이 섭취한 음식 사진들을 한눈에 볼 수 있도록 하고 날짜별로 자세한 식사 정보를 
+조회할 수 있습니다.
+이  캘린더는  사용자가  기간별로  자신의  식단을  쉽게  추적하고,  영양소  정보  및  칼로리 
+소비량도  조회할  수  있습니다.  곧  사용자는  자신의  식사  기록을  통해  어떤  음식을  얼마나 
+섭취했는지  확인하고  건강한  목표를  달성하기  위한  진행  상황을  파악할  수  있습니다.  또한 
+앱  사용자들이  더  건강하고  밸런스  잡힌  식단을  쉽게  구성하고  관리할  수  있을  것입니다.  즉 
+사용자가  자신의  식사  기록을  추적하고  개인적인  목표를  설정하여  건강한  라이프스타일을 
+달성할  수  있습니다.
+```
+
+
+
+회원가입 시스템 구현 > https://m.blog.naver.com/bgpoilkj/221073079209
+
+phpmyadmin 사용자 계정 생성 > http://yoonbumtae.com/?p=3541
+
+
+
+>  사용자 계정 생성 후 가입하기 누르면 질의보내서 데이터베이스 업데이트 되는 부분 확인
+>
+>  다음 목표 : 로그인 기능할 때 데이터베이스의 이메일, 비밀번호 확인 후 정상 로그인
+>
+>  ​			가입하기 누르고 정상적으로 가입되면 알려주는 기능 필요(콘솔로 충분?)
+>
+>  ​		가입할 때도 이미 있는 이메일일 경우 거부하기
+
+아 이메일 말고 아이디로 다 바꿔야 할듯,,이메일,,귀찮고 기니까,,
+
+phpMyAdmin Auto_Increment 사용 > https://serpiko.tistory.com/559
