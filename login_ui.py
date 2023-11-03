@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'e:\git_E\studyLog\SoftwareArchitecture\proj\login.ui'
+# Form implementation generated from reading ui file 'login.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -77,7 +77,7 @@ class Ui_Form(object):
         self.loginButton.setFont(font)
         self.loginButton.setStyleSheet("QPushButton#loginButton{\n"
 "    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(255, 255, 255, 100), stop: 1 rgba(255, 255, 255, 100));\n"
-"    color: rgb(105, 118, 132, 150);\n"
+"    color: rgba(105, 118, 132, 150);\n"
 "    border-radius: 5px;\n"
 "}\n"
 "QPushButton#loginButton:hover{\n"
@@ -87,16 +87,24 @@ class Ui_Form(object):
 "QPushButton#loginButton:pressed{\n"
 "    padding-left: 5px;\n"
 "    padding-top: 5px;\n"
-"    background-color: rgba(255, 255, 255);\n"
+"    background-color: rgb(255, 255, 255);\n"
 "}")
         self.loginButton.setObjectName("loginButton")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.Login_page)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(110, 350, 151, 51))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(70, 360, 223, 51))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_4 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(7)
+        self.label_4.setFont(font)
+        self.label_4.setStyleSheet("color: rgb(105, 118, 132);")
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout.addWidget(self.label_4)
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton_2.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
@@ -171,14 +179,14 @@ class Ui_Form(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.label_4 = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
+        self.label_5 = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(7)
-        self.label_4.setFont(font)
-        self.label_4.setStyleSheet("color: rgb(105, 118, 132);")
-        self.label_4.setObjectName("label_4")
-        self.horizontalLayout_2.addWidget(self.label_4)
+        self.label_5.setFont(font)
+        self.label_5.setStyleSheet("color: rgb(105, 118, 132);")
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout_2.addWidget(self.label_5)
         self.createAccButton = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
         font = QtGui.QFont()
         font.setFamily("Microsoft JhengHei UI")
@@ -188,7 +196,7 @@ class Ui_Form(object):
         self.createAccButton.setFont(font)
         self.createAccButton.setStyleSheet("QPushButton#createAccButton {\n"
 "    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(255, 255, 255, 50), stop: 1 rgba(255, 255, 255, 100));\n"
-"    color: rgb(105, 118, 132, 150);\n"
+"    color: rgba(105, 118, 132, 150);\n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
@@ -214,9 +222,20 @@ class Ui_Form(object):
         self.email.setPlaceholderText(_translate("Form", "Email"))
         self.password.setPlaceholderText(_translate("Form", " Password"))
         self.loginButton.setText(_translate("Form", "Log In"))
+        self.label_4.setText(_translate("Form", "Login with Social media"))
         self.pushButton_2.setText(_translate("Form", "Ú"))
         self.pushButton_3.setText(_translate("Form", "À"))
         self.pushButton_4.setText(_translate("Form", "Í"))
-        self.label_4.setText(_translate("Form", "Login with Social media"))
+        self.label_5.setText(_translate("Form", "Click to Sign up >>>"))
         self.createAccButton.setText(_translate("Form", "Sign Up"))
 import res_rc
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'e:\git_E\studyLog\SoftwareArchitecture\proj\createacc.ui'
+# Form implementation generated from reading ui file 'createacc.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -44,69 +44,8 @@ class Ui_Form(object):
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(105, 118, 132);")
         self.label_3.setObjectName("label_3")
-        self.signupButton = QtWidgets.QPushButton(self.Register_page)
-        self.signupButton.setGeometry(QtCore.QRect(80, 270, 200, 41))
-        font = QtGui.QFont()
-        font.setFamily("Microsoft JhengHei UI")
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.signupButton.setFont(font)
-        self.signupButton.setStyleSheet("QPushButton#loginButton{\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(255, 255, 255, 100), stop: 1 rgba(255, 255, 255, 100));\n"
-"    color: rgb(105, 118, 132, 150);\n"
-"    border-radius: 5px;\n"
-"}\n"
-"QPushButton#loginButton:hover{\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(255, 255, 255, 100), stop: 1 rgba(255, 255, 255, 226));\n"
-"    color: rgba(131, 96, 53, 255); /* 호버 상태일 때의 글꼴 색상 변경 */\n"
-"}\n"
-"QPushButton#loginButton:pressed{\n"
-"    padding-left: 5px;\n"
-"    padding-top: 5px;\n"
-"    background-color: rgba(255, 255, 255, 150);\n"
-"}")
-        self.signupButton.setObjectName("signupButton")
-        self.horizontalLayoutWidget = QtWidgets.QWidget(self.Register_page)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(80, 330, 201, 80))
-        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label_4 = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(7)
-        self.label_4.setFont(font)
-        self.label_4.setStyleSheet("color: rgb(105, 118, 132);")
-        self.label_4.setObjectName("label_4")
-        self.horizontalLayout.addWidget(self.label_4)
-        self.signUpButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Microsoft JhengHei UI")
-        font.setPointSize(9)
-        font.setBold(True)
-        font.setWeight(75)
-        self.signUpButton.setFont(font)
-        self.signUpButton.setStyleSheet("QPushButton#signUpButton {\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(255, 255, 255, 50), stop: 1 rgba(255, 255, 255, 100));\n"
-"    color: rgb(105, 118, 132, 150);\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QPushButton#signUpButton:hover {\n"
-"    color: rgba(131, 96, 53, 255); /* 호버 상태일 때의 글꼴 색상 변경 */\n"
-"}\n"
-"\n"
-"QPushButton#signUpButton:pressed {\n"
-"    padding-left: 5px; /* 클릭 시 왼쪽 여백 추가 */\n"
-"    padding-top: 5px; /* 클릭 시 위쪽 여백 추가 */\n"
-"    color: rgba(91, 88, 53, 255); /* 클릭 시 글꼴 색상 변경 */\n"
-"}")
-        self.signUpButton.setObjectName("signUpButton")
-        self.horizontalLayout.addWidget(self.signUpButton)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.Register_page)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(80, 130, 201, 131))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(80, 130, 201, 251))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -147,6 +86,29 @@ class Ui_Form(object):
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password.setObjectName("password")
         self.verticalLayout.addWidget(self.password)
+        self.signupButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("Microsoft JhengHei UI")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.signupButton.setFont(font)
+        self.signupButton.setStyleSheet("QPushButton#signupButton{\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(255, 255, 255, 100), stop: 1 rgba(255, 255, 255, 100));\n"
+"    color: rgba(105, 118, 132, 150);\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPushButton#signupButton:hover{\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(255, 255, 255, 100), stop: 1 rgba(255, 255, 255, 226));\n"
+"    color: rgba(131, 96, 53, 255); /* 호버 상태일 때의 글꼴 색상 변경 */\n"
+"}\n"
+"QPushButton#signupButton:pressed{\n"
+"    padding-left: 5px;\n"
+"    padding-top: 5px;\n"
+"    background-color: rgba(255, 255, 255, 150);\n"
+"}")
+        self.signupButton.setObjectName("signupButton")
+        self.verticalLayout.addWidget(self.signupButton)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -155,10 +117,18 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_3.setText(_translate("Form", "Sign Up"))
-        self.signupButton.setText(_translate("Form", "Sign Up"))
-        self.label_4.setText(_translate("Form", "Click to Log In"))
-        self.signUpButton.setText(_translate("Form", "login"))
         self.name.setPlaceholderText(_translate("Form", " User Name"))
         self.email.setPlaceholderText(_translate("Form", " Email"))
         self.password.setPlaceholderText(_translate("Form", " Password"))
+        self.signupButton.setText(_translate("Form", "Sign Up"))
 import res_rc
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 from login_ui import Ui_Form
 
+# 이미지 리소스 오류 때문에 ui.py를 가져와서 GUI열기
 class LoginForm(QWidget):
     def __init__(self):
         super(LoginForm, self).__init__()
