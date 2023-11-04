@@ -1,6 +1,4 @@
 
 *.pyc
-*.pyc
-__pycache__/createacc_ui.cpython-311.pyc
-__pycache__/createacc_ui.cpython-311.pyc
-*.pyc
+/__pycache__
+
