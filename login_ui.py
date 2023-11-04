@@ -44,17 +44,17 @@ class Ui_Form(object):
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(105, 118, 132);")
         self.label_3.setObjectName("label_3")
-        self.email = QtWidgets.QLineEdit(self.Login_page)
-        self.email.setGeometry(QtCore.QRect(80, 140, 200, 40))
+        self.userID = QtWidgets.QLineEdit(self.Login_page)
+        self.userID.setGeometry(QtCore.QRect(80, 140, 200, 40))
         font = QtGui.QFont()
         font.setFamily("Bahnschrift")
-        self.email.setFont(font)
-        self.email.setStyleSheet("background-color:rgba(0, 0, 0, 0);\n"
+        self.userID.setFont(font)
+        self.userID.setStyleSheet("background-color:rgba(0, 0, 0, 0);\n"
 "border:none;\n"
 "border-bottom:2px solid rgba(105, 118, 132, 255);\n"
 "color: rgb(105, 118, 132);\n"
 "padding-bottom:7px;")
-        self.email.setObjectName("email")
+        self.userID.setObjectName("userID")
         self.password = QtWidgets.QLineEdit(self.Login_page)
         self.password.setGeometry(QtCore.QRect(80, 200, 200, 40))
         font = QtGui.QFont()
@@ -219,7 +219,7 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_3.setText(_translate("Form", "LOG-IN"))
-        self.email.setPlaceholderText(_translate("Form", "Email"))
+        self.userID.setPlaceholderText(_translate("Form", "ID"))
         self.password.setPlaceholderText(_translate("Form", " Password"))
         self.loginButton.setText(_translate("Form", "Log In"))
         self.label_4.setText(_translate("Form", "Login with Social media"))

@@ -86,7 +86,7 @@ border-radius:15px;</string>
      <string>LOG-IN</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="email">
+   <widget class="QLineEdit" name="userID">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -108,7 +108,7 @@ color: rgb(105, 118, 132);
 padding-bottom:7px;</string>
     </property>
     <property name="placeholderText">
-     <string>Email</string>
+     <string>ID</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="password">

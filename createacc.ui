@@ -116,7 +116,7 @@ padding-bottom:7px;</string>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="email">
+      <widget class="QLineEdit" name="userID">
        <property name="font">
         <font>
          <family>Bahnschrift</family>
@@ -136,7 +136,7 @@ padding-bottom:7px;</string>
         <number>32768</number>
        </property>
        <property name="placeholderText">
-        <string> Email</string>
+        <string>ID</string>
        </property>
       </widget>
      </item>

@@ -61,19 +61,19 @@ class Ui_Form(object):
 "padding-bottom:7px;")
         self.name.setObjectName("name")
         self.verticalLayout.addWidget(self.name)
-        self.email = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.userID = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setFamily("Bahnschrift")
-        self.email.setFont(font)
-        self.email.setStyleSheet("background-color:rgba(0, 0, 0, 0);\n"
+        self.userID.setFont(font)
+        self.userID.setStyleSheet("background-color:rgba(0, 0, 0, 0);\n"
 "border:none;\n"
 "border-bottom:2px solid rgba(105, 118, 132, 255);\n"
 "color: rgb(105, 118, 132);\n"
 "padding-bottom:7px;")
-        self.email.setText("")
-        self.email.setMaxLength(32768)
-        self.email.setObjectName("email")
-        self.verticalLayout.addWidget(self.email)
+        self.userID.setText("")
+        self.userID.setMaxLength(32768)
+        self.userID.setObjectName("userID")
+        self.verticalLayout.addWidget(self.userID)
         self.password = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setFamily("Bahnschrift")
@@ -118,7 +118,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_3.setText(_translate("Form", "Sign Up"))
         self.name.setPlaceholderText(_translate("Form", " User Name"))
-        self.email.setPlaceholderText(_translate("Form", " Email"))
+        self.userID.setPlaceholderText(_translate("Form", "ID"))
         self.password.setPlaceholderText(_translate("Form", " Password"))
         self.signupButton.setText(_translate("Form", "Sign Up"))
 import res_rc
