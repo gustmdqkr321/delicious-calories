@@ -6,10 +6,33 @@ Delicious-Calories is a health management application that allows users to quick
 
 - 이미지 추가
 - 구조 추가
+## 테스트 아이디 비번
 
+```
+ID : 123
+이름 : 123
+비번 : 123
+```
+## 실행
 
-   - 디렉토리 파일 구조 예시 https://ahnty0122.tistory.com/74
-![image](https://github.com/hhzzzk/delicious-calories/assets/67236054/3e2c88bc-f831-4d12-9734-e92545e49f7d)
+main.py 실행
 
+## 구조
+```bash
+├── main.py
+├── loginwindow.py
+│   ├── create_account──success/fail
+│   └── login──success/fail
+└── main_page.py
+│   ├── image_upload.py
+│   ├── profile_edit.py
+│   └── (tmp)calender
+────────────────────────────────────
+etc
+────────────────────────────────────
+login_ui.py
+createacc_ui.py
+database_utils.py
+```
 
 
