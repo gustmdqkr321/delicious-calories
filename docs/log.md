@@ -31,6 +31,10 @@ pyuic5 -x login.ui -o login_ui.py
 
 pyuic5 -x  createacc.ui -o createacc_ui.py
 
+pyuic5 -x splash_screen.ui -o splash_screen_ui.py
+
+pyuic5 my_ui_file.ui -o my_ui_file.py
+
 ---
 
 - 로그인 화면 뜨고 가입 버튼 클릭시 가입화면 뜸. 가입화면이나 로그인화면에서 입력을 콘솔로 출력까지 완료
@@ -113,3 +117,11 @@ todo
   - UI 만들기
 - 로그인 회원가입 핸들링 부분 합치기 - 완
 
+
+
+
+## 11/5
+
+todo
+
+- https://github.com/openfoodfacts

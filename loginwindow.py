@@ -1,7 +1,6 @@
 import mysql.connector
 from PyQt5.QtWidgets import QDialog, QApplication, QVBoxLayout, QWidget, QMessageBox
 from PyQt5.QtCore import QObject, pyqtSignal
-# from PyQt5.uic import loadUi
 from login_ui import Ui_Form as loginUI
 from createacc_ui import Ui_Form as createaccUI
 from main_page import MainMenuApp
@@ -106,3 +105,8 @@ class CreateAccountWindow(QDialog, DatabaseUtils):
             print("Failed to insert record into MySQL table:", error)
             QMessageBox.information(self, "Failed", "Failed to create account, try again!")
 
+
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+#     window = LoginWindow()
+#     sys.exit(app.exec())
