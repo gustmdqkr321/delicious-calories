@@ -61,10 +61,11 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(214, 168, 149);</string>
+        <string notr="true">color: rgb(220, 155, 142);
+background-color: transparent;</string>
        </property>
        <property name="text">
-        <string>&lt;strong&gt;YOUR&lt;/strong&gt; APP NAME</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;DELICIOUS&lt;/span&gt; CALORIES&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -86,7 +87,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(98, 114, 164);</string>
+        <string notr="true">color: rgb(98, 114, 164);
+background-color: transparent;</string>
        </property>
        <property name="text">
         <string>&lt;strong&gt;APP&lt;/strong&gt; DESCRIPTION</string>
@@ -108,14 +110,14 @@
         <string notr="true">QProgressBar {
 	
 	background-color: rgb(98, 114, 164);
-	color: rgb(200, 200, 200);
+	color: rgba(200, 200, 200, 180);
 	border-style: none;
 	border-radius: 10px;
 	text-align: center;
 }
 QProgressBar::chunk{
 	border-radius: 10px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0.511364, x2:1, y2:0.523, stop:0 rgba(236, 188, 167, 255), stop:1 rgba(255, 255, 255, 150));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0.511364, x2:1, y2:0.523, stop:0 rgba(236, 188, 167, 200), stop:1 rgba(255, 255, 255, 100));
 }</string>
        </property>
        <property name="value">
@@ -125,9 +127,9 @@ QProgressBar::chunk{
       <widget class="QLabel" name="label_loading">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>40</x>
          <y>320</y>
-         <width>661</width>
+         <width>621</width>
          <height>21</height>
         </rect>
        </property>
@@ -147,11 +149,54 @@ QProgressBar::chunk{
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
+      <widget class="QLabel" name="image">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>661</width>
+         <height>361</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-image: url(:/startImage/Food.jpg);
+opacity: 0.3;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="white">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>641</width>
+         <height>341</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgba(255,255,255,200);
+border-radius:15px;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <zorder>image</zorder>
+      <zorder>white</zorder>
+      <zorder>label_description</zorder>
+      <zorder>label_loading</zorder>
+      <zorder>label_title</zorder>
+      <zorder>progressBar</zorder>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+  <include location="start.qrc"/>
+ </resources>
  <connections/>
 </ui>

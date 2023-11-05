@@ -25,6 +25,8 @@ QCssParser::parseColorValue: Specified color without alpha value but alpha given
 
 ```
 pyuic5 -x your_ui_file.ui -o output_py_file.py
+
+pyrcc5 res.qrc -o res_rc.py
 ```
 
 pyuic5 -x login.ui -o login_ui.py
@@ -34,6 +36,10 @@ pyuic5 -x  createacc.ui -o createacc_ui.py
 pyuic5 -x splash_screen.ui -o splash_screen_ui.py
 
 pyuic5 my_ui_file.ui -o my_ui_file.py
+
+pyuic5 main_page.ui -o main_page_ui.py
+
+pyside6-uic splash_screen.ui -o splash_screen_ui.py
 
 ---
 
@@ -124,4 +130,44 @@ todo
 
 todo
 
-- https://github.com/openfoodfacts
+- 음식칼로리 이미지셋 > https://github.com/openfoodfacts
+  - 간단한 카테고리의 음식만이라도 칼로리 인식 가능하게?
+- 캘린더뷰 제작
+
+
+
+fin
+
+- 시작 화면 추가
+- 메인UI 제작 및 연결
+
+## 구조
+
+```
+├── main.py
+├── start_page.py
+├── loginwindow.py
+│   ├── create_account────success/fail
+│   └── login─────────────success/fail
+└── main_page.py
+│   ├── profile image edit────
+│   ├── goal edit─────────────
+│   ├── Upload Food───────────image_upload.py
+│   └── Calender View─────────
+────────────────────────────────────
+UI
+────────────────────────────────────
+splash_screen_ui.py
+login_ui.py
+createacc_ui.py
+main_page_ui.py
+
+res_rc.py
+start_rc.py
+────────────────────────────────────
+DB
+────────────────────────────────────
+datebase_utils.py
+
+```
+

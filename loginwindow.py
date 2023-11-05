@@ -18,17 +18,6 @@ class LoginWindow(QDialog, DatabaseUtils):
         self.ui.createAccButton.clicked.connect(self.goToCreate)
         
         self.conn = None
-    # DB 연결
-    def mysql_connection(self):
-        if self.conn is None or not self.conn.is_connected():
-            self.conn = mysql.connector.connect(
-                host="localhost",
-                user="delicious_admin",
-                password="123123123",
-                database="delicious_calories_db"
-            )
-        return self.conn
-    
     def login(self):
         userID = self.ui.userID.text()
         password = self.ui.password.text()

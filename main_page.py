@@ -3,38 +3,26 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 from image_upload import ImageUploaderApp
 from profile_edit import ProfileEditApp
-
+from main_page_ui import Ui_Form as mainUI
 # 캘린더 뷰 추가해서 연결하기
 # from calendar_viewer import CalendarViewerApp
 
 class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메뉴 선택 순서
     def __init__(self):
-        super().__init__()
+        super(MainMenuApp, self).__init__()
+        self.ui = mainUI()
+        self.ui.setupUi(self)
 
-        self.initUI()
+        self.buttonHandle()
 
-    def initUI(self):
-        self.setWindowTitle("메인 메뉴")
-        self.setGeometry(100, 100, 400, 200)
-
-        self.central_widget = QWidget(self)
-        self.setCentralWidget(self.central_widget)
-
-        layout = QVBoxLayout()
-
-        self.image_upload_button = QPushButton("이미지 업로드")
-        self.image_upload_button.clicked.connect(self.show_image_uploader)
-        layout.addWidget(self.image_upload_button)
-
-        self.profile_edit_button = QPushButton("프로필 수정")
-        self.profile_edit_button.clicked.connect(self.show_profile_editor)
-        layout.addWidget(self.profile_edit_button)
-
-        self.calendar_viewer_button = QPushButton("캘린더 조회")
-        self.calendar_viewer_button.clicked.connect(self.show_calendar_viewer)
-        layout.addWidget(self.calendar_viewer_button)
-
-        self.central_widget.setLayout(layout)
+    def buttonHandle(self):
+        self.ui.uploadfoodButton.clicked.connect(self.show_image_uploader)
+        
+        self.ui.profileEditButton.clicked.connect(self.show_profile_editor)
+ 
+        self.ui.calenderButton.clicked.connect(self.show_calendar_viewer)
+        
+        self.ui.goalEditButton.clicked.connect(self.show_goal_editor)
 
     def show_image_uploader(self):
         self.image_uploader = ImageUploaderApp()
@@ -45,8 +33,13 @@ class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메�
         self.profile_editor.show()
 
     def show_calendar_viewer(self):
-        self.calendar_viewer = CalendarViewerApp()
-        self.calendar_viewer.show()
+        pass
+        # self.calendar_viewer = CalendarViewerApp()
+        # self.calendar_viewer.show()
+    
+    def show_goal_editor(self):
+        pass
+        #self.goal_editor.show()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
