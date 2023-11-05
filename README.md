@@ -18,21 +18,41 @@ ID : 123
 main.py 실행
 
 ## 구조
-```bash
+
+```
 ├── main.py
+├── start_page.py
 ├── loginwindow.py
-│   ├── create_account──success/fail
-│   └── login──success/fail
+│   ├── create_account────success/fail
+│   └── login─────────────success/fail
 └── main_page.py
-│   ├── image_upload.py
-│   ├── profile_edit.py
-│   └── (tmp)calender
+│   ├── profile image edit────
+│   ├── goal edit─────────────
+│   ├── Upload Food───────────image_upload.py
+│   └── Calender View─────────
 ────────────────────────────────────
-etc
+UI
 ────────────────────────────────────
+splash_screen_ui.py
 login_ui.py
 createacc_ui.py
-database_utils.py
+main_page_ui.py
+
+res_rc.py
+start_rc.py
+────────────────────────────────────
+DB
+────────────────────────────────────
+datebase_utils.py
+
 ```
 
+## version
+
+```
+Qt version: 5.15.2
+PySide version: 6.6.0
+Python version: 3.11.5 | packaged by Anaconda
+MySQL version: 8.2.0
+```
 

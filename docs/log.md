@@ -171,3 +171,12 @@ datebase_utils.py
 
 ```
 
+## version
+
+```
+Qt version: 5.15.2
+PySide version: 6.6.0
+Python version: 3.11.5 | packaged by Anaconda
+MySQL version: 8.2.0
+```
+
