@@ -7,7 +7,7 @@ from main_page import MainMenuApp
 import subprocess
 start_path = "start_page.py"
 if __name__ == "__main__":
-    subprocess.run(["python", start_path])
+    # subprocess.run(["python", start_path])
     
     app = QApplication(sys.argv)
     login_window = LoginWindow()

@@ -1,15 +1,12 @@
-import mysql.connector
+# database_utils.py
+import sqlite3
 
 class DatabaseUtils:
     def __init__(self):
         self.conn = None
 
-    def mysql_connection(self):
-        if self.conn is None or not self.conn.is_connected():
-            self.conn = mysql.connector.connect(
-                host="localhost",
-                user="delicious_admin",
-                password="123123123",
-                database="delicious_calories_db"
-            )
+    def sqlite_connection(self):
+        db_file = "userdata.db"
+        if self.conn is None:
+            self.conn = sqlite3.connect(db_file)
         return self.conn
