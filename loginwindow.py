@@ -1,4 +1,4 @@
-import mysql.connector
+import sqlite3
 from PyQt5.QtWidgets import QDialog, QApplication, QVBoxLayout, QWidget, QMessageBox
 from PyQt5.QtCore import QObject, pyqtSignal
 from login_ui import Ui_Form as loginUI
@@ -21,13 +21,13 @@ class LoginWindow(QDialog, DatabaseUtils):
     def login(self):
         userID = self.ui.userID.text()
         password = self.ui.password.text()
-        # MySQL 연동 및 로그인 정보 확인
+        # SQLite 연동 및 로그인 정보 확인
         try:
-            conn = self.mysql_connection()
+            conn = self.sqlite_connection()  # SQLite 연결, 데이터베이스 파일 경로를 전달해야 합니다.
             cursor = conn.cursor()
             
             # Check if userID and password are valid
-            query = "SELECT * FROM users WHERE ID = %s AND password = %s"
+            query = "SELECT * FROM users WHERE ID = ? AND password = ?"
             data = (userID, password)
             cursor.execute(query, data)
             result = cursor.fetchone()
@@ -40,9 +40,10 @@ class LoginWindow(QDialog, DatabaseUtils):
                 print("Login failed. Invalid credentials.")
                 QMessageBox.information(self, "Failed", "Login failed. Invalid credentials.")
 
-        except mysql.connector.Error as error:
-            print("Failed to connect to MySQL server:", error)
-            QMessageBox.information(self, "Error", "Failed to connect to MySQL server.")
+        except sqlite3.Error as error:
+            print("Failed to connect to SQLite database:", error)
+            QMessageBox.information(self, "Error", "Failed to connect to SQLite database.")
+
 
     def goToCreate(self):
         create_window = CreateAccountWindow()
@@ -68,13 +69,13 @@ class CreateAccountWindow(QDialog, DatabaseUtils):
         userID = self.ui.userID.text()
         password = self.ui.password.text()
         
-        # MySQL 연동 및 회원가입 정보 저장
+        # SQLite 연동 및 회원가입 정보 저장
         try:
-            conn = self.mysql_connection()
+            conn = self.sqlite_connection()  # SQLite 연결
             cursor = conn.cursor()
                 
             # Check if userID already exists
-            check_query = "SELECT * FROM users WHERE ID = %s"
+            check_query = "SELECT * FROM users WHERE ID = ?"
             check_data = (userID,)
             cursor.execute(check_query, check_data)
             result = cursor.fetchone()
@@ -83,15 +84,15 @@ class CreateAccountWindow(QDialog, DatabaseUtils):
                 print(f"UserID {userID} already exists. Creation denied.")
                 QMessageBox.information(self, "Denied", "UserID already exists. Creation denied.")
             else:
-                query = "INSERT INTO users (username, ID, password) VALUES (%s, %s, %s)"
+                query = "INSERT INTO users (username, ID, password) VALUES (?, ?, ?)"
                 data = (name, userID, password)
                 cursor.execute(query, data)
                 conn.commit()
                 conn.close()
                 print(f"Successfully created account with ID: {userID} and password: {password}")
                 QMessageBox.information(self, "Success", "Successfully created account!")
-        except mysql.connector.Error as error:
-            print("Failed to insert record into MySQL table:", error)
+        except sqlite3.Error as error:
+            print("Failed to insert record into SQLite table:", error)
             QMessageBox.information(self, "Failed", "Failed to create account, try again!")
 
 
