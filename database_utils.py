@@ -10,3 +10,22 @@ class DatabaseUtils:
         if self.conn is None:
             self.conn = sqlite3.connect(db_file)
         return self.conn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
