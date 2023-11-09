@@ -18,3 +18,4 @@ if __name__ == "__main__":
         sys.exit(app.exec_())
         #1107 확인
         #1109 test
+        #1109 test1
