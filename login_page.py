@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QVBoxLayout, QWidget, QMessag
 from PyQt5.QtCore import QObject, pyqtSignal
 from login_ui import Ui_Form as loginUI
 from createacc_ui import Ui_Form as createaccUI
-from main_page import MainMenuApp
+from main_page import MainWindow
 from database_utils import DatabaseUtils
 import sys
 
@@ -51,7 +51,7 @@ class LoginWindow(QDialog, DatabaseUtils):
         create_window.exec_()
 
     def open_main_menu(self):
-        main_menu = MainMenuApp()
+        main_menu = MainWindow()
         main_menu.show()
         self.close()
         

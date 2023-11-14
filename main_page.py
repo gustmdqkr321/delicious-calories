@@ -4,12 +4,11 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushB
 from image_upload import ImageUploaderApp
 from profile_edit import ProfileEditApp
 from main_page_ui import Ui_Form as mainUI
-# 캘린더 뷰 추가해서 연결하기
-# from calendar_viewer import CalendarViewerApp
+from calendar_page import CalendarWindow
 
-class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메뉴 선택 순서
+class MainWindow(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메뉴 선택 순서
     def __init__(self):
-        super(MainMenuApp, self).__init__()
+        super(MainWindow, self).__init__()
         self.ui = mainUI()
         self.ui.setupUi(self)
 
@@ -33,16 +32,15 @@ class MainMenuApp(QMainWindow): # 메인 페이지, 로그인 -> 메인 -> 메�
         self.profile_editor.show()
 
     def show_calendar_viewer(self):
-        pass
-        # self.calendar_viewer = CalendarViewerApp()
-        # self.calendar_viewer.show()
+        self.calendar_viewer = CalendarWindow()
+        self.calendar_viewer.show()
     
     def show_goal_editor(self):
         pass
         #self.goal_editor.show()
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MainMenuApp()
-    window.show()
-    sys.exit(app.exec_())
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     window = MainWindow()
+#     window.show()
+#     sys.exit(app.exec_())
