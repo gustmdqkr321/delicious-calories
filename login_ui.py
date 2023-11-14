@@ -228,7 +228,6 @@ class Ui_Form(object):
         self.pushButton_4.setText(_translate("Form", "Í"))
         self.label_5.setText(_translate("Form", "Click to Sign up >>>"))
         self.createAccButton.setText(_translate("Form", "Sign Up"))
-import res_rc
 
 
 if __name__ == "__main__":

@@ -1,21 +1,22 @@
+# main.py
 import sys
 from PyQt5.QtWidgets import QApplication, QDialog
 from start_page import StartWindow
-from loginwindow import LoginWindow
-from main_page import MainMenuApp
+from login_page import LoginWindow
+from main_page import MainWindow
+from calendar_page import CalendarWindow
 
 import subprocess
-start_path = "start_page.py"
+#start_path = "start_page.py"
 if __name__ == "__main__":
-    subprocess.run(["python", start_path]) # 로딩 화면
+    # subprocess.run(["python", start_path]) # 로딩 화면
     
     app = QApplication(sys.argv)
     login_window = LoginWindow()
     
     if login_window.exec_() == QDialog.Accepted:  # 로그인이 성공해 로그인창이 정상적으로 닫혔을 경우
-        main_menu = MainMenuApp()
+        main_menu = MainWindow()
+
         main_menu.show()
         sys.exit(app.exec_())
-        #1107 확인
-        #1109 test
-        #1109 test1
+
