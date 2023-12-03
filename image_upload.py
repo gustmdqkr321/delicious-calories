@@ -97,8 +97,6 @@ class ImageUploaderApp(QWidget):
     def searchCalorieInfo(self, food_label):
         try:
             # 여기에서 음식의 칼로리를 검색하는 코드를 추가
-            # 이는 음식의 이름을 기반으로 온라인 데이터베이스 또는 API에서 정보를 가져오는 방식일 수 있습니다.
-            # 예를 들어, 미리 설정된 데이터베이스를 사용하거나 오픈 API를 활용할 수 있습니다.
 
             # 임시로 예시로서 고정된 값 반환
             calorie_value = "100"  # 이 값을 실제로 검색한 칼로리 값으로 대체해야 합니다.
