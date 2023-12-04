@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout,QHBoxLayout, QPushButton, QLabel, QFileDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QFileDialog
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import Qt
 from PIL import Image
@@ -7,6 +7,7 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image as keras_image
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2, preprocess_input, decode_predictions
 import numpy as np
+from googletrans import Translator
 
 class ImageUploaderApp(QWidget):
     def __init__(self):
@@ -14,6 +15,7 @@ class ImageUploaderApp(QWidget):
 
         # InceptionResNetV2 모델 로드 (Food101 데이터셋 기반)
         self.model = InceptionResNetV2(weights='imagenet')
+        self.translator = Translator()
 
         self.initUI()
 
@@ -63,7 +65,10 @@ class ImageUploaderApp(QWidget):
 
                 # 음식 예측 수행
                 food_label = self.predictFood(filePath)
-                self.result_label.setText(f"이미지는 {food_label}입니다.")
+
+                # 음식 라벨을 번역
+                translated_label = self.translateText(food_label)
+                self.result_label.setText(f"이미지는 {translated_label}입니다.")
             except Exception as e:
                 print("이미지를 로드하지 못했습니다:", e)
 
@@ -105,6 +110,16 @@ class ImageUploaderApp(QWidget):
         except Exception as e:
             print("칼로리 정보를 가져오지 못했습니다:", e)
             return "알 수 없음"
+
+    def translateText(self, text):
+        try:
+            # 음식 라벨을 한국어로 번역
+            translated_text = self.translator.translate(text, src='en', dest='ko').text
+            return translated_text
+        except Exception as e:
+            print("텍스트를 번역하지 못했습니다:", e)
+            return text
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = ImageUploaderApp()
