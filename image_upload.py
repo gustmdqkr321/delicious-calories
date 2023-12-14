@@ -1,12 +1,14 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout,QHBoxLayout, QPushButton, QLabel, QFileDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QFileDialog
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import Qt
+import pandas as pd
 from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image as keras_image
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2, preprocess_input, decode_predictions
 import numpy as np
+from googletrans import Translator
 
 class ImageUploaderApp(QWidget):
     def __init__(self):
@@ -14,8 +16,10 @@ class ImageUploaderApp(QWidget):
 
         # InceptionResNetV2 모델 로드 (Food101 데이터셋 기반)
         self.model = InceptionResNetV2(weights='imagenet')
+        self.translator = Translator()
+        self.calorie_data = pd.read_csv('test.csv')
 
-        self.initUI()
+        self.initUI()   
 
     def initUI(self):
         self.setWindowTitle('음식 이미지 업로더 앱')
@@ -63,7 +67,10 @@ class ImageUploaderApp(QWidget):
 
                 # 음식 예측 수행
                 food_label = self.predictFood(filePath)
-                self.result_label.setText(f"이미지는 {food_label}입니다.")
+
+                # 음식 라벨을 번역
+                translated_label = self.translateText(food_label)
+                self.result_label.setText(f"사진은 {translated_label}입니다.")
             except Exception as e:
                 print("이미지를 로드하지 못했습니다:", e)
 
@@ -81,9 +88,11 @@ class ImageUploaderApp(QWidget):
             # 예측 결과 디코딩
             decoded_predictions = decode_predictions(predictions, top=1)[0]
             food_label = decoded_predictions[0][1]
+            # 번역하기
+            translated_label = self.translateText(food_label)
 
             # 검색을 통해 음식의 칼로리 얻기
-            calorie_info = self.searchCalorieInfo(food_label)
+            calorie_info = self.searchCalorieInfo(translated_label)
 
             # 결과 텍스트 설정
             result_text = f"이미지는 {food_label}이며, 칼로리는 {calorie_info}kcal입니다."
@@ -96,17 +105,33 @@ class ImageUploaderApp(QWidget):
 
     def searchCalorieInfo(self, food_label):
         try:
-            # 여기에서 음식의 칼로리를 검색하는 코드를 추가
-            # 이는 음식의 이름을 기반으로 온라인 데이터베이스 또는 API에서 정보를 가져오는 방식일 수 있습니다.
-            # 예를 들어, 미리 설정된 데이터베이스를 사용하거나 오픈 API를 활용할 수 있습니다.
+            # Search for the food label in the DataFrame
+            matching_row = self.calorie_data[self.calorie_data['식품명'] == food_label]
 
-            # 임시로 예시로서 고정된 값 반환
-            calorie_value = "100"  # 이 값을 실제로 검색한 칼로리 값으로 대체해야 합니다.
-            self.calorie_label.setText(f"칼로리: {calorie_value} kcal")
-            return calorie_value
+            if not matching_row.empty:
+                # If a matching row is found, get the calorie value
+                calorie_value = float(matching_row['칼로리'].values[0])
+                self.calorie_label.setText(f"칼로리: {calorie_value} kcal")
+                return calorie_value
+            else:
+                # If no matching row is found, set a default value
+                default_calorie_value = "Not Found"
+                self.calorie_label.setText(f"칼로리: {default_calorie_value}")
+                return default_calorie_value
+
         except Exception as e:
             print("칼로리 정보를 가져오지 못했습니다:", e)
             return "알 수 없음"
+
+    def translateText(self, text):
+        try:
+            # 음식 라벨을 한국어로 번역
+            translated_text = self.translator.translate(text, src='en', dest='ko').text
+            return translated_text
+        except Exception as e:
+            print("텍스트를 번역하지 못했습니다:", e)
+            return text
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = ImageUploaderApp()
