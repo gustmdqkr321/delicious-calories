@@ -38,6 +38,9 @@ class ImageUploaderApp(QWidget):
         self.calorie_label = QLabel(self)
         self.calorie_label.setAlignment(Qt.AlignCenter)
 
+        self.serving_size_label = QLabel(self)
+        self.serving_size_label.setAlignment(Qt.AlignCenter)
+
         layout = QVBoxLayout()
         layout.addWidget(self.image_label)
         layout.addWidget(self.upload_button)
@@ -46,6 +49,7 @@ class ImageUploaderApp(QWidget):
         info_layout = QHBoxLayout()
         info_layout.addWidget(self.result_label)
         info_layout.addWidget(self.calorie_label)
+        info_layout.addWidget(self.serving_size_label)
 
         # 전체 레이아웃 설정
         layout.addLayout(info_layout)
@@ -92,11 +96,15 @@ class ImageUploaderApp(QWidget):
             translated_label = self.translateText(food_label)
 
             # 검색을 통해 음식의 칼로리 얻기
-            calorie_info = self.searchCalorieInfo(translated_label)
+            calorie_info, serving_size, serving_unit = self.searchCalorieInfo(translated_label)
 
             # 결과 텍스트 설정
             result_text = f"이미지는 {food_label}이며, 칼로리는 {calorie_info}kcal입니다."
             self.result_label.setText(result_text)
+
+            # 1회 제공량과 단위 표시
+            serving_text = f"1회 제공량: {serving_size} {serving_unit}"
+            self.serving_size_label.setText(serving_text)
 
             return food_label
         except Exception as e:
@@ -105,19 +113,24 @@ class ImageUploaderApp(QWidget):
 
     def searchCalorieInfo(self, food_label):
         try:
-            # Search for the food label in the DataFrame
             matching_row = self.calorie_data[self.calorie_data['식품명'] == food_label]
 
             if not matching_row.empty:
-                # If a matching row is found, get the calorie value
                 calorie_value = float(matching_row['칼로리'].values[0])
+                serving_size = float(matching_row['1회제공량'].values[0])
+                serving_unit = matching_row['내용량_단위'].values[0]
+
                 self.calorie_label.setText(f"칼로리: {calorie_value} kcal")
-                return calorie_value
+                return calorie_value, serving_size, serving_unit
             else:
-                # If no matching row is found, set a default value
                 default_calorie_value = "Not Found"
+                default_serving_size = "Not Found"
+                default_serving_unit = "Not Found"
+
                 self.calorie_label.setText(f"칼로리: {default_calorie_value}")
-                return default_calorie_value
+                self.serving_size_label.setText(f"1회 제공량: {default_serving_size} {default_serving_unit}")
+
+                return default_calorie_value, default_serving_size, default_serving_unit
 
         except Exception as e:
             print("칼로리 정보를 가져오지 못했습니다:", e)
