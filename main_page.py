@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, pyqtSignal
+import re
 from main_page_ui import Ui_Form as mainUI
 from calendar_page import CalendarWindow
 from profile_edit import profileEditApp
@@ -40,7 +41,7 @@ class MainWindow(QMainWindow):
 
     def update_cal(self,cal):
         self.cal_label.setText(f"진행:{cal}")
-
+        
     def update_profile_image(self, image_path):
         pixmap = QPixmap(image_path)
         self.profile_image_label.setPixmap(pixmap)

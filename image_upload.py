@@ -12,7 +12,8 @@ import numpy as np
 from googletrans import Translator
 
 class ImageUploaderApp(QWidget):
-    calorie_signal = pyqtSignal(str)
+    calorie_signal = pyqtSignal(float)
+    cal_val = 0
     def __init__(self):
         super().__init__()
 
@@ -105,7 +106,7 @@ class ImageUploaderApp(QWidget):
             # 결과 텍스트 설정
             result_text = f"이미지는 {food_label}이며, 칼로리는 {calorie_info}kcal입니다."
             self.result_label.setText(result_text)
-
+            self.cal_val = calorie_info
             # 1회 제공량과 단위 표시
             serving_text = f"1회 제공량: {serving_size} {serving_unit}"
             self.serving_size_label.setText(serving_text)
@@ -148,8 +149,7 @@ class ImageUploaderApp(QWidget):
             print("텍스트를 번역하지 못했습니다:", e)
             return text
     def save_cal(self):
-        cal = self.calorie_label.text()
-        self.calorie_signal.emit(cal)  # 목표 저장 신호를 발생시켜 메인 윈도우에 전달
+        self.calorie_signal.emit(self.cal_val)  # 목표 저장 신호를 발생시켜 메인 윈도우에 전달
         self.close()
 if __name__ == '__main__':
     app = QApplication(sys.argv)
