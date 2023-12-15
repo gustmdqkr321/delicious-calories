@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         
         # 이미지 레이블을 생성합니다.
         self.profile_image_label = QLabel(self.ui.profile_image)
-        self.profile_image_label.setGeometry(20, 20, 30, 30)  # 적절한 위치와 크기로 조절하세요.
+        self.profile_image_label.setGeometry(20, 20, 100, 100)  # 적절한 위치와 크기로 조절하세요.
         self.profile_edit.confirm_signal.connect(self.update_profile_image)
         
         self.goal_edit = goalEditApp()  # GoalEditApp 인스턴스 생성
