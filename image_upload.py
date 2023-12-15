@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QFileDialog
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 import pandas as pd
 from PIL import Image
 import tensorflow as tf
@@ -11,6 +12,7 @@ import numpy as np
 from googletrans import Translator
 
 class ImageUploaderApp(QWidget):
+    calorie_signal = pyqtSignal(str)
     def __init__(self):
         super().__init__()
 
@@ -50,7 +52,9 @@ class ImageUploaderApp(QWidget):
         info_layout.addWidget(self.result_label)
         info_layout.addWidget(self.calorie_label)
         info_layout.addWidget(self.serving_size_label)
-
+        self.save_cal_button = QPushButton("기록 저장")
+        self.save_cal_button.clicked.connect(self.save_cal)
+        layout.addWidget(self.save_cal_button)
         # 전체 레이아웃 설정
         layout.addLayout(info_layout)
         self.setLayout(layout)
@@ -143,7 +147,10 @@ class ImageUploaderApp(QWidget):
         except Exception as e:
             print("텍스트를 번역하지 못했습니다:", e)
             return text
-
+    def save_cal(self):
+        cal = self.calorie_label.text()
+        self.calorie_signal.emit(cal)  # 목표 저장 신호를 발생시켜 메인 윈도우에 전달
+        self.close()
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = ImageUploaderApp()

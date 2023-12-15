@@ -25,12 +25,21 @@ class MainWindow(QMainWindow):
         self.goal_label = QLabel(self.ui.goal_content)
         self.goal_label.setGeometry(20, 50, 200, 30)  # 적절한 위치와 크기로 조절하세요.
 
+        self.imageupload = ImageUploaderApp()  # GoalEditApp 인스턴스 생성
+        self.imageupload.calorie_signal.connect(self.update_cal)
+
+        self.cal_label = QLabel(self.ui.goal_content)
+        self.cal_label.setGeometry(20, 80, 200, 30)  # 적절한 위치와 크기로 조절하세요.
+        
         self.buttonHandle()
 
     def update_goal(self, goal):
         print("새로운 목표:", goal)
         self.goal_label.setText(f"현재 목표: {goal}")
 
+
+    def update_cal(self,cal):
+        self.cal_label.setText(f"진행:{cal}")
 
     def update_profile_image(self, image_path):
         pixmap = QPixmap(image_path)
@@ -43,8 +52,8 @@ class MainWindow(QMainWindow):
         self.ui.goalEditButton.clicked.connect(self.show_goal_editor)
 
     def show_image_uploader(self):
-        self.image_uploader = ImageUploaderApp()
-        self.image_uploader.show()
+        self.imageupload.calorie_signal.connect(self.update_cal)
+        self.imageupload.show()
 
     def show_profile_editor(self):
         self.profile_edit.confirm_signal.connect(self.update_profile_image)
