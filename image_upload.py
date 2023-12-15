@@ -138,7 +138,6 @@ class ImageUploaderApp(QWidget):
 
     def translateText(self, text):
         try:
-            # 음식 라벨을 한국어로 번역
             translated_text = self.translator.translate(text, src='en', dest='ko').text
             return translated_text
         except Exception as e:
