@@ -32,16 +32,29 @@ class MainWindow(QMainWindow):
         self.cal_label = QLabel(self.ui.goal_content)
         self.cal_label.setGeometry(20, 80, 200, 30)  # 적절한 위치와 크기로 조절하세요.
         
+        self.diff_goal_cal_label = QLabel(self.ui.goal_content)
+        self.diff_goal_cal_label.setGeometry(20, 110, 200, 30)
+
         self.buttonHandle()
 
     def update_goal(self, goal):
         print("새로운 목표:", goal)
         self.goal_label.setText(f"현재 목표: {goal}")
+        self.update_diff_label()
 
+    def update_diff_label(self):
+        goal_value_match = re.search(r'\d+', self.goal_label.text())
+        cal_value_match = re.search(r'\d+', self.cal_label.text())
+
+        goal_value = float(goal_value_match.group()) if goal_value_match else 0
+        cal_value = float(cal_value_match.group()) if cal_value_match else 0
+
+        diff_value = goal_value - cal_value
+        self.diff_goal_cal_label.setText(f"목표와의 차이: {diff_value}")
 
     def update_cal(self,cal):
         self.cal_label.setText(f"진행:{cal}")
-        
+        self.update_diff_label()
     def update_profile_image(self, image_path):
         pixmap = QPixmap(image_path)
         self.profile_image_label.setPixmap(pixmap)
