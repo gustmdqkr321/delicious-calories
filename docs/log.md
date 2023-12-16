@@ -27,6 +27,7 @@ QCssParser::parseColorValue: Specified color without alpha value but alpha given
 pyuic5 -x your_ui_file.ui -o output_py_file.py
 
 pyrcc5 res.qrc -o res_rc.py
+>>> 이미지 표시안될때
 ```
 
 pyuic5 -x login.ui -o login_ui.py
@@ -184,6 +185,33 @@ fin
 - mysql 건들다가 서버 터짐..ㅋㅋㅋ
 - SQLite 쓰면 될듯, 업데이트 완
 
+
+
+
+
+
+
+
+# 12/16
+
+##### todo
+
+1. ui 사이즈 키우기 : 유진이 환경에서 크기 적당하게 > 확인요망
+2. db랑 ui 연결해서 이미지랑 이름 제대로 출력되도록 > ㅇㅋ
+3. 이미지 처리한 거랑 프로필 이미지 업로드 db 적용 > ㅇㅋ
+4. 달력과 연결 db 연결 등
+
+
+
+**complete**
+
+- 1 : 사이즈 fixed로 바꿈, 유진이 환경에서 되나 확인
+
+
+- 2023-12-16 00:47:10.084848: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+  WARNING:tensorflow:From C:\Users\dkxl1\anaconda3\Lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+  - 오류메세지 미치겟음
+- ​
 
 
 ## 구조

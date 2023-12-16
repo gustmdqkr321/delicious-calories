@@ -1,8 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QFileDialog
+from PyQt5.QtWidgets import QDateEdit, QComboBox, QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QFileDialog
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import Qt
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt, pyqtSignal, QDate
 import pandas as pd
 from PIL import Image
 import tensorflow as tf
@@ -10,7 +10,8 @@ from tensorflow.keras.preprocessing import image as keras_image
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2, preprocess_input, decode_predictions
 import numpy as np
 from googletrans import Translator
-
+from database_utils import db_instance
+import os
 class ImageUploaderApp(QWidget):
     calorie_signal = pyqtSignal(float)
     cal_val = 0
@@ -44,6 +45,17 @@ class ImageUploaderApp(QWidget):
         self.serving_size_label = QLabel(self)
         self.serving_size_label.setAlignment(Qt.AlignCenter)
 
+        # 식사 시간대 라벨 추가
+        self.meal_time_label = QLabel('식사 시간대:', self)
+
+        self.meal_time_combobox = QComboBox(self)
+        self.meal_time_combobox.addItem('아침')
+        self.meal_time_combobox.addItem('점심')
+        self.meal_time_combobox.addItem('저녁')
+
+        self.date_edit = QDateEdit(QDate.currentDate())  # 초기 날짜 설정
+        self.date_edit.setCalendarPopup(True)  # 달력 팝업 활성화
+
         layout = QVBoxLayout()
         layout.addWidget(self.image_label)
         layout.addWidget(self.upload_button)
@@ -53,12 +65,23 @@ class ImageUploaderApp(QWidget):
         info_layout.addWidget(self.result_label)
         info_layout.addWidget(self.calorie_label)
         info_layout.addWidget(self.serving_size_label)
+        layout.addLayout(info_layout)
+
+        # 식사 시간대 및 날짜 선택 위젯 추가
+        layout.addWidget(self.meal_time_label)
+        layout.addWidget(self.meal_time_combobox)
+        layout.addWidget(self.date_edit)
+
         self.save_cal_button = QPushButton("기록 저장")
         self.save_cal_button.clicked.connect(self.save_cal)
         layout.addWidget(self.save_cal_button)
+
         # 전체 레이아웃 설정
-        layout.addLayout(info_layout)
         self.setLayout(layout)
+
+        # 선택한 날짜와 식사 시간대를 저장할 변수 초기화
+        self.selected_date = None
+        self.selected_meal_time = None
 
     def uploadImage(self):
         options = QFileDialog.Options()
@@ -148,9 +171,42 @@ class ImageUploaderApp(QWidget):
         except Exception as e:
             print("텍스트를 번역하지 못했습니다:", e)
             return text
+        
     def save_cal(self):
-        self.calorie_signal.emit(self.cal_val)  # 목표 저장 신호를 발생시켜 메인 윈도우에 전달
+        selected_date = self.date_edit.date().toString(Qt.ISODate)  # 선택한 날짜를 ISO 형식의 문자열로 가져오기
+        if selected_date:
+            user_id = db_instance.get_user_id()  # 현재 사용자의 아이디 가져오기
+            
+            # 이미지 이름과 경로 설정
+            image_name = f"user_{user_id}_meal_{self.selected_meal_time}_{selected_date}.jpg"  # 이미지 이름 생성
+            image_dir = "food_images"  # 이미지를 저장할 디렉토리
+            image_path = os.path.join(image_dir, image_name)  # 이미지 파일 경로 생성
+            
+            # 디렉토리가 없다면 생성
+            if not os.path.exists(image_dir):
+                os.makedirs(image_dir)
+
+            # 이미지 저장
+            image_pixmap = self.image_label.pixmap()
+            if image_pixmap:
+                image_pixmap.save(image_path)
+            else:
+                print("이미지가 없습니다.")
+                return
+
+            meal_time = self.selected_meal_time  # 선택한 식사 시간대
+            calorie = self.cal_val  # 기록된 칼로리
+
+            # db_stance의 save_image_data 함수를 호출하여 데이터를 데이터베이스에 저장
+            db_instance.save_image_data(user_id, image_name, image_path, meal_time, selected_date, calorie)
+
+            # 목표 저장 신호를 발생시켜 메인 윈도우에 전달
+            self.calorie_signal.emit(self.cal_val)
+        else:
+            print("날짜를 선택하세요.")
+
         self.close()
+        
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = ImageUploaderApp()
