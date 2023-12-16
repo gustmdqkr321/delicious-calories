@@ -26,7 +26,6 @@ class MainWindow(QMainWindow):
         self.goal_edit.goal_saved_signal.connect(self.update_goal)
 
         self.image_upload = ImageUploaderApp()
-        self.image_upload.calorie_signal.connect(self.update_cal)
 
         self.init_ui()
 
@@ -39,18 +38,17 @@ class MainWindow(QMainWindow):
         self.profile_image_label = QLabel(self.ui.profile_image)
         self.profile_image_label.setGeometry(20, 20, 100, 100)
         
-        self.goal_label = QLabel(self.ui.goal_content)
-        self.goal_label.setGeometry(20, 50, 200, 30)
+        # self.goal_label = QLabel(self.ui.goal_content)
+        # self.goal_label.setGeometry(20, 50, 200, 30)
 
-        self.cal_label = QLabel(self.ui.goal_content)
-        self.cal_label.setGeometry(20, 80, 200, 30)
+        # self.cal_label = QLabel(self.ui.goal_content)
+        # self.cal_label.setGeometry(20, 80, 200, 30)
         
-        self.diff_goal_cal_label = QLabel(self.ui.goal_content)
-        self.diff_goal_cal_label.setGeometry(20, 110, 200, 30)
+        # self.diff_goal_cal_label = QLabel(self.ui.goal_content)
+        # self.diff_goal_cal_label.setGeometry(20, 110, 200, 30)
 
         self.update_profile_image()
         self.update_goal()
-        self.update_cal()
     
     def update_profile_image(self, user_image_path=None):
         default_image_path="profile_image/default.jpeg"
@@ -76,25 +74,10 @@ class MainWindow(QMainWindow):
         return result[0] if result else None
 
     def update_goal(self, goal=None):
-        db_instance.set_goal(goal)  # 목표를 데이터베이스에 저장
-        
-        self.goal_label.setText(f"현재 목표: {goal}")
-        self.update_diff_label()
-
-    def update_diff_label(self):
-        goal_value_match = re.search(r'\d+', self.goal_label.text())
-        cal_value_match = re.search(r'\d+', self.cal_label.text())
-
-        goal_value = float(goal_value_match.group()) if goal_value_match else 0
-        cal_value = float(cal_value_match.group()) if cal_value_match else 0
-
-        diff_value = goal_value - cal_value
-        self.diff_goal_cal_label.setText(f"목표와의 차이: {diff_value}")
-
-    def update_cal(self, cal=None):
-        # cal = cal or db_instance.get_calorie()  # 데이터베이스에서 칼로리 정보 가져오기
-        self.cal_label.setText(f"진행: {cal}")
-        self.update_diff_label()
+        if goal is not None:
+            db_instance.set_goal(goal)  # 목표를 데이터베이스에 저장
+        updated_goal = db_instance.get_goal()  # 데이터베이스에서 최신 목표 칼로리 가져오기
+        self.ui.current_goal.setText(f"{updated_goal}")
 
     def button_handle(self):
         self.ui.uploadfoodButton.clicked.connect(self.show_image_uploader)

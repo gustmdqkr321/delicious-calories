@@ -57,7 +57,6 @@ class CalendarWindow(QWidget):
             print(f"{selected_date}: {goal_rate_txt}%")
             self.goal_rate.setText(goal_rate_txt)
             
-            combined_text = f"{selected_date}\n"
             self.select_date.setText(f"{selected_date}\n")
             self.daily_calories.setText(daily_calories_text)  # 레이블에 문자열 설정
 
@@ -105,10 +104,12 @@ class CalendarWindow(QWidget):
                 image_label.setScaledContents(True)
                 image_label.setAlignment(Qt.AlignCenter)
             else:
+                image_label.clear()
                 print(f"No {meal_type} img")
 
         except Exception as e:
             print(f"Error displaying {meal_type} image: {e}")
+
 
         
 # 테스트용

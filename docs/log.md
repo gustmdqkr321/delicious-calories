@@ -40,6 +40,8 @@ pyuic5 my_ui_file.ui -o my_ui_file.py
 
 pyuic5 main_page.ui -o main_page_ui.py
 
+pyuic5 calendarView.ui -o calendarView_ui.py
+
 pyside6-uic splash_screen.ui -o splash_screen_ui.py
 
 ---
