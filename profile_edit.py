@@ -40,8 +40,8 @@ class profileEditApp(QMainWindow):
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
 
-        self.image_path = ""  # 업로드된 이미지 경로를 저장할 변수
-
+        self.image_path = ""  # 업로드된 이미지 경로를 저장할 변수    
+    
     def uploadImage(self):
         options = QFileDialog.Options()
         options |= QFileDialog.ReadOnly
@@ -55,8 +55,17 @@ class profileEditApp(QMainWindow):
                 max_width, max_height = self.image_label.width(), self.image_label.height()
                 image.thumbnail((max_width, max_height))
                 pixmap = QPixmap.fromImage(QImage(image.tobytes(), image.width, image.height, image.width * 3, QImage.Format_RGB888))
-                self.image_label.setPixmap(pixmap)
 
+                # 이미 레이아웃이 설정되어 있으면 제거
+                if self.image_label.layout():
+                    layout = self.image_label.layout()
+                    while layout.count():
+                        item = layout.takeAt(0)
+                        widget = item.widget()
+                        if widget:
+                            widget.deleteLater()
+
+                self.image_label.setPixmap(pixmap)
             except Exception as e:
                 print("이미지를 로드하지 못했습니다:", e)
 
@@ -73,7 +82,7 @@ class profileEditApp(QMainWindow):
                 # 이미지 파일을 프로필 이미지 폴더에 복사
                 try:
                     os.makedirs(profile_image_folder, exist_ok=True)
-                    shutil.copy(self.image_path, image_path)
+                    shutil.copyfile(self.image_path, image_path)
                 except Exception as e:
                     print("이미지를 복사하지 못했습니다:", e)
 

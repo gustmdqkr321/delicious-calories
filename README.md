@@ -10,7 +10,7 @@ Delicious-Calories is a health management application that allows users to quick
 
 ```
 ID : 123
-이름 : 123
+이름 : admin
 비번 : 123
 ```
 ## 실행
