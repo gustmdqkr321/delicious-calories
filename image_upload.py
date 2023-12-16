@@ -52,7 +52,9 @@ class ImageUploaderApp(QWidget):
         self.meal_time_combobox.addItem('아침')
         self.meal_time_combobox.addItem('점심')
         self.meal_time_combobox.addItem('저녁')
-
+        # 디폴트로 '아침'을 선택하도록 설정
+        self.meal_time_combobox.setCurrentIndex(0)
+        
         self.date_edit = QDateEdit(QDate.currentDate())  # 초기 날짜 설정
         self.date_edit.setCalendarPopup(True)  # 달력 팝업 활성화
 
@@ -176,15 +178,18 @@ class ImageUploaderApp(QWidget):
         selected_date = self.date_edit.date().toString(Qt.ISODate)  # 선택한 날짜를 ISO 형식의 문자열로 가져오기
         if selected_date:
             user_id = db_instance.get_user_id()  # 현재 사용자의 아이디 가져오기
+            # 식사시간대 저장
+            meal_time_index = self.meal_time_combobox.currentIndex()  # 선택한 식사 시간대 인덱스 가져오기
+            meal_times = ['아침', '점심', '저녁']  # 각 인덱스에 해당하는 식사 시간대 목록
+
+            meal_time = meal_times[meal_time_index]  # 선택한 인덱스에 해당하는 식사 시간대 가져오기
+            print("선택한 식사 시간대:", meal_time)  # 선택한 식사 시간대 출력
             
             # 이미지 이름과 경로 설정
-            image_name = f"user_{user_id}_meal_{self.selected_meal_time}_{selected_date}.jpg"  # 이미지 이름 생성
+            image_name = f"user_{user_id}_meal_{meal_time}_{selected_date}.jpg"  # 이미지 이름 생성
             image_dir = "food_images"  # 이미지를 저장할 디렉토리
             image_path = os.path.join(image_dir, image_name)  # 이미지 파일 경로 생성
             
-            # 디렉토리가 없다면 생성
-            if not os.path.exists(image_dir):
-                os.makedirs(image_dir)
 
             # 이미지 저장
             image_pixmap = self.image_label.pixmap()
@@ -194,14 +199,13 @@ class ImageUploaderApp(QWidget):
                 print("이미지가 없습니다.")
                 return
 
-            meal_time = self.selected_meal_time  # 선택한 식사 시간대
-            calorie = self.cal_val  # 기록된 칼로리
+            calorie = float(self.cal_val)  # 기록된 칼로리를 실수(float)로 변환
 
-            # db_stance의 save_image_data 함수를 호출하여 데이터를 데이터베이스에 저장
+            # db_instance의 save_image_data 함수를 호출하여 데이터를 데이터베이스에 저장
             db_instance.save_image_data(user_id, image_name, image_path, meal_time, selected_date, calorie)
 
             # 목표 저장 신호를 발생시켜 메인 윈도우에 전달
-            self.calorie_signal.emit(self.cal_val)
+            self.calorie_signal.emit(calorie)  # 실수 값을 보냄
         else:
             print("날짜를 선택하세요.")
 

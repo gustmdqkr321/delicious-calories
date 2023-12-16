@@ -51,9 +51,10 @@ class MainWindow(QMainWindow):
         self.update_profile_image()
         self.update_goal()
         self.update_cal()
-
+    
     def update_profile_image(self, user_image_path=None):
         default_image_path="profile_image/default.jpeg"
+        user_image_path = db_instance.get_user_profile_image_path()  # 사용자 프로필 이미지 경로 가져오기
         if not user_image_path:
             user_image_path = default_image_path
 
@@ -75,7 +76,8 @@ class MainWindow(QMainWindow):
         return result[0] if result else None
 
     def update_goal(self, goal=None):
-        # goal = goal or db_instance.get_goal()  # 데이터베이스에서 목표 가져오기
+        db_instance.set_goal(goal)  # 목표를 데이터베이스에 저장
+        
         self.goal_label.setText(f"현재 목표: {goal}")
         self.update_diff_label()
 
@@ -113,6 +115,7 @@ class MainWindow(QMainWindow):
     def show_goal_editor(self):
         self.goal_edit.show()
 
+# 테스트용
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
