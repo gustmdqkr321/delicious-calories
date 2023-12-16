@@ -4,6 +4,9 @@ from PyQt5.QtCore import pyqtSignal, QObject
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import Qt
 from PIL import Image
+from database_utils import db_instance
+import os
+import shutil
 
 class profileEditApp(QMainWindow):
     confirm_signal = pyqtSignal(str)
@@ -60,9 +63,27 @@ class profileEditApp(QMainWindow):
     def confirmImage(self):
         if self.image_path:
             print("확인 버튼 클릭, 이미지 경로:", self.image_path)
-            # 여기에 확인 버튼을 눌렀을 때 원하는 동작 추가
+            current_user_id = db_instance.get_user_id()  # 현재 사용자의 ID 가져오기
+            if current_user_id:
+                # 이미지를 프로필 이미지 폴더에 저장
+                profile_image_folder = "profile_image"
+                image_filename = f"{current_user_id}.png"  # 파일 이름을 사용자 ID로 저장
+                image_path = os.path.join(profile_image_folder, image_filename)
+
+                # 이미지 파일을 프로필 이미지 폴더에 복사
+                try:
+                    os.makedirs(profile_image_folder, exist_ok=True)
+                    shutil.copy(self.image_path, image_path)
+                except Exception as e:
+                    print("이미지를 복사하지 못했습니다:", e)
+
+                # 데이터베이스에 이미지 경로 저장
+                db_instance.save_user_profile_image_path(image_path)
+                
+            # 확인 버튼을 눌렀을 때 원하는 동작 추가
             self.confirm_signal.emit(self.image_path)
             self.close()  # 확인 버튼을 눌렀을 때 창을 닫음
+            
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = profileEditApp()

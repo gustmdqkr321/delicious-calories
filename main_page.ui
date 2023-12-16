@@ -10,6 +10,12 @@
     <height>640</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -48,7 +54,7 @@ border-radius:15px;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="profile_image">
+  <widget class="QLabel" name="profile_image_2">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -58,7 +64,7 @@ border-radius:15px;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-radius: 50%; /* 반지름을 크기의 50%로 설정하여 동그란 형태를 만듭니다. */
+    <string notr="true">border-radius: 30%;
 background-color: rgba(195, 195, 195, 255);</string>
    </property>
    <property name="text">
@@ -329,6 +335,22 @@ background-color: rgba(195, 195, 195, 70);</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="profile_image">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>30</y>
+     <width>111</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

@@ -15,6 +15,11 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(480, 640)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+        Form.setSizePolicy(sizePolicy)
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(30, 20, 411, 581))
         self.label.setStyleSheet("background-color: rgb(239, 236, 232);\n"
@@ -28,12 +33,12 @@ class Ui_Form(object):
 "border-radius:15px;")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
-        self.profile_image = QtWidgets.QLabel(Form)
-        self.profile_image.setGeometry(QtCore.QRect(170, 30, 131, 111))
-        self.profile_image.setStyleSheet("border-radius: 50%; /* 반지름을 크기의 50%로 설정하여 동그란 형태를 만듭니다. */\n"
+        self.profile_image_2 = QtWidgets.QLabel(Form)
+        self.profile_image_2.setGeometry(QtCore.QRect(170, 30, 131, 111))
+        self.profile_image_2.setStyleSheet("border-radius: 30%;\n"
 "background-color: rgba(195, 195, 195, 255);")
-        self.profile_image.setText("")
-        self.profile_image.setObjectName("profile_image")
+        self.profile_image_2.setText("")
+        self.profile_image_2.setObjectName("profile_image_2")
         self.verticalLayoutWidget = QtWidgets.QWidget(Form)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 150, 351, 181))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -202,6 +207,11 @@ class Ui_Form(object):
         self.goal.setStyleSheet("color: rgb(105, 118, 132);")
         self.goal.setAlignment(QtCore.Qt.AlignCenter)
         self.goal.setObjectName("goal")
+        self.profile_image = QtWidgets.QLabel(Form)
+        self.profile_image.setGeometry(QtCore.QRect(180, 30, 111, 111))
+        self.profile_image.setStyleSheet("background-color: rgba(255, 255, 255, 0);")
+        self.profile_image.setText("")
+        self.profile_image.setObjectName("profile_image")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
