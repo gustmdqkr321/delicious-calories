@@ -4,6 +4,9 @@
 
 Delicious-Calories is a health management application that allows users to quickly retrieve calorie information of food by taking a picture. The app provides a calendar feature for users to manage their health.
 
+## github
+- https://github.com/gustmdqkr321/delicious-calories
+
 ## Features
 
 - **Calorie Information**: Snap a picture of your meal, and the app will provide you with calorie information for each food item.
