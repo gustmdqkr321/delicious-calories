@@ -4,20 +4,49 @@
 
 Delicious-Calories is a health management application that allows users to quickly retrieve calorie information of food by taking a picture. The app provides a calendar feature for users to manage their health.
 
-- 이미지 추가
-- 구조 추가
-## 테스트 아이디 비번
+## Features
+
+- **Calorie Information**: Snap a picture of your meal, and the app will provide you with calorie information for each food item.
+- **Calendar View**: Keep track of your daily health activities and meals using the built-in calendar.
+- **Profile Management**: Edit your profile picture and set your health goals.
+- **User Authentication**: Create an account and log in to access personalized features.
+
+## Installation and Usage
+
+1. Clone the repository to your local machine.
+
+2. Install the required dependencies.
+
+3. Run the application.
+
+   ```
+   python main.py
+   ```
+
+## Dependencies
+
+```
+Qt version: 5.15.2
+PySide version: 6.6.0
+Python version: 3.11.5 | packaged by Anaconda
+MySQL version: 8.2.0
+tensorflow 2.15.0
+googletrans 4.0.0-rc.1
+```
+
+## Database Setup
+
+Before running the application, make sure to configure the database settings in `database_utils.py`.
+
+## Test Account
 
 ```
 ID : 123
 이름 : admin
 비번 : 123
 ```
-## 실행
 
-main.py 실행
-
-## 구조
+## Directory Structure
 
 ```
 ├── main.py
@@ -47,14 +76,17 @@ datebase_utils.py
 
 ```
 
-## version
 
-```
-Qt version: 5.15.2
-PySide version: 6.6.0
-Python version: 3.11.5 | packaged by Anaconda
-MySQL version: 8.2.0
-tensorflow 2.15.0
-googletrans 4.0.0-rc.1
-```
+
+# Demo
+
+![SA](tmp/SA.gif)
+
+![SA (1)](tmp/SA (1).gif)
+
+![SA (2)](tmp/SA (2).gif)
+
+![SA (3)](tmp/SA (3).gif)
+
+![SA (4)](tmp/SA (4).gif)
 
