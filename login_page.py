@@ -1,13 +1,12 @@
 # login_page.py
-import sqlite3
+
+import sys
 from PyQt5.QtWidgets import QDialog, QApplication, QVBoxLayout, QWidget, QMessageBox
 from PyQt5.QtCore import QObject, pyqtSignal
 from login_ui import Ui_Form as loginUI
 from createacc_ui import Ui_Form as createaccUI
 from main_page import MainWindow
-# from database_utils import DatabaseUtils
-from database_utils import db_instance
-import sys
+from database_utils import db_instance  # Import db_instance from the database_utils module
 
 class LoginWindow(QDialog):
     def __init__(self):
@@ -19,7 +18,6 @@ class LoginWindow(QDialog):
         self.ui.loginButton.clicked.connect(self.login)
         self.ui.createAccButton.clicked.connect(self.goToCreate)
         
-        self.conn = db_instance.get_connection()
     def login(self):
         userID = self.ui.userID.text()
         password = self.ui.password.text()
@@ -33,7 +31,6 @@ class LoginWindow(QDialog):
         else:
             QMessageBox.information(self, "Failed", "Login failed. Invalid credentials.")
 
-
     def goToCreate(self):
         create_window = CreateAccountWindow()
         create_window.exec_()
@@ -42,7 +39,6 @@ class LoginWindow(QDialog):
         main_menu = MainWindow()
         main_menu.show()
         self.close()
-        
 
 class CreateAccountWindow(QDialog):
     def __init__(self):
@@ -60,28 +56,17 @@ class CreateAccountWindow(QDialog):
         
         # SQLite 연동 및 회원가입 정보 저장
         try:
-            conn = self.sqlite_connection()  # SQLite 연결
-            cursor = conn.cursor()
-                
             # Check if userID already exists
-            check_query = "SELECT * FROM users WHERE ID = ?"
-            check_data = (userID,)
-            cursor.execute(check_query, check_data)
-            result = cursor.fetchone()
-            
-            if result:
+            if db_instance.check_user_exist(userID):
                 print(f"UserID {userID} already exists. Creation denied.")
                 QMessageBox.information(self, "Denied", "UserID already exists. Creation denied.")
             else:
-                query = "INSERT INTO users (username, ID, password) VALUES (?, ?, ?)"
-                data = (name, userID, password)
-                cursor.execute(query, data)
-                conn.commit()
-                conn.close()
+                db_instance.create_user(name, userID, password)
                 print(f"Successfully created account with ID: {userID} and password: {password}")
                 QMessageBox.information(self, "Success", "Successfully created account!")
-        except sqlite3.Error as error:
-            print("Failed to insert record into SQLite table:", error)
+                self.close()
+        except Exception as e:
+            print("Failed to create account:", str(e))
             QMessageBox.information(self, "Failed", "Failed to create account, try again!")
 
 

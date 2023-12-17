@@ -63,10 +63,6 @@ class CalendarWindow(QWidget):
         except Exception as e:
             print("목표 달성율을 계산하는 동안 오류 발생:", e)
 
-
-
-        
-        
     def delete_images(self):
         try:
             conn = db_instance.get_connection()

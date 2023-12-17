@@ -24,10 +24,11 @@ class DatabaseUtils:
     
     def check_login(self, user_id, password):
         try:
+            self.create_connection()
             cursor = self.conn.cursor()
 
             # 로그인 정보 확인 쿼리
-            query = "SELECT * FROM users WHERE ID = ? AND password = ?"
+            query = "SELECT * FROM users WHERE user_id = ? AND password = ?"
             data = (user_id, password)
             cursor.execute(query, data)
             result = cursor.fetchone()
@@ -41,7 +42,64 @@ class DatabaseUtils:
         except sqlite3.Error as e:
             print("Failed to connect to SQLite database:", str(e))
             return False
-    
+
+    def check_user_exist(self, user_id):
+        """
+        사용자 아이디가 데이터베이스에 이미 존재하는지 확인하는 메서드입니다.
+
+        Args:
+            user_id (str): 확인하려는 사용자 아이디.
+
+        Returns:
+            bool: 사용자 아이디가 이미 존재하면 True, 그렇지 않으면 False를 반환합니다.
+        """
+        try:
+            self.create_connection()  # 데이터베이스 연결을 설정합니다.
+            cursor = self.conn.cursor()
+
+            # 입력된 사용자 아이디와 일치하는 데이터베이스 레코드를 조회합니다.
+            query = "SELECT * FROM users WHERE user_id = ?"
+            data = (user_id,)
+            cursor.execute(query, data)
+            result = cursor.fetchone()
+
+            # 결과가 있으면 사용자 아이디가 이미 존재함을 나타냅니다.
+            if result:
+                return True
+            else:
+                return False
+        except sqlite3.Error as e:
+            print("SQLite 데이터베이스에서 사용자 아이디 확인 중 오류 발생:", str(e))
+            return False
+
+    def create_user(self, name, user_id, password):
+        """
+        새로운 사용자를 데이터베이스에 생성하는 메서드입니다.
+
+        Args:
+            name (str): 사용자의 이름.
+            user_id (str): 사용자 아이디.
+            password (str): 사용자 비밀번호.
+
+        Returns:
+            bool: 사용자 생성이 성공하면 True, 그렇지 않으면 False를 반환합니다.
+        """
+        try:
+            self.create_connection()  # 데이터베이스 연결을 설정합니다.
+            cursor = self.conn.cursor()
+
+            # 사용자 정보를 데이터베이스에 삽입하는 쿼리를 실행합니다.
+            query = "INSERT INTO users (username, user_id, password) VALUES (?, ?, ?)"
+            data = (name, user_id, password)
+            cursor.execute(query, data)
+            self.conn.commit()
+
+            # 사용자 생성이 성공적으로 완료됨을 나타냅니다.
+            return True
+        except sqlite3.Error as e:
+            print("SQLite 데이터베이스에서 사용자 생성 중 오류 발생:", str(e))
+            return False
+        
     def set_user_id(self, user_id):
         self.user_id = user_id
 
@@ -51,7 +109,7 @@ class DatabaseUtils:
     def get_user_name(self):
         if self.user_id is not None:
             cursor = self.conn.cursor()
-            cursor.execute("SELECT username FROM users WHERE id = ?", (self.user_id,))
+            cursor.execute("SELECT username FROM users WHERE user_id = ?", (self.user_id,))
             result = cursor.fetchone()
             if result:
                 return result[0]
@@ -60,7 +118,7 @@ class DatabaseUtils:
     def save_user_profile_image_path(self, image_path):
         cursor = self.conn.cursor()
         try:
-            cursor.execute("UPDATE users SET profile_image_path = ? WHERE id = ?", (image_path, self.user_id))
+            cursor.execute("UPDATE users SET profile_image_path = ? WHERE user_id = ?", (image_path, self.user_id))
             self.conn.commit()
         except sqlite3.Error as e:
             print("Error updating user profile image path:", str(e))
@@ -84,14 +142,14 @@ class DatabaseUtils:
     def set_goal(self, goal):
         cursor = self.conn.cursor()
         try:
-            cursor.execute("UPDATE users SET goal = ? WHERE id = ?", (goal, self.user_id))
+            cursor.execute("UPDATE users SET goal = ? WHERE user_id = ?", (goal, self.user_id))
             self.conn.commit()
         except sqlite3.Error as e:
             print("Error updating user goal:", str(e))
             
     def get_goal(self):
         cursor = self.conn.cursor()
-        cursor.execute("SELECT goal FROM users WHERE id = ?", (self.user_id,))
+        cursor.execute("SELECT goal FROM users WHERE user_id = ?", (self.user_id,))
         result = cursor.fetchone()
         
         if result is not None and result[0] is not None:
@@ -105,7 +163,7 @@ class DatabaseUtils:
             cursor = self.conn.cursor()
 
             # 사용자 ID에 해당하는 프로필 이미지 경로 가져오기
-            query = "SELECT profile_image_path FROM users WHERE id = ?"
+            query = "SELECT profile_image_path FROM users WHERE user_id = ?"
             data = (self.user_id,)
             cursor.execute(query, data)
             result = cursor.fetchone()
