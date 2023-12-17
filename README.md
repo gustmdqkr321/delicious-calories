@@ -79,14 +79,10 @@ datebase_utils.py
 
 
 # Demo
+![SA](https://github.com/hhzzzk/delicious-calories/assets/67236054/210c96c7-36eb-481c-b15f-51b3791f74ec)
+![SA (1)](https://github.com/hhzzzk/delicious-calories/assets/67236054/e4f50430-f0c9-4c53-9932-bc293b18ad43)
+![SA (2)](https://github.com/hhzzzk/delicious-calories/assets/67236054/b45e152c-a91d-4695-a5d9-a0dba13a1e58)
+![SA (3)](https://github.com/hhzzzk/delicious-calories/assets/67236054/0a74dc04-8176-44a7-ae6b-a4168725955f)
+![SA (4)](https://github.com/hhzzzk/delicious-calories/assets/67236054/4dbae6d7-be96-4daf-a19c-ec5aa2ade329)
 
-![SA](tmp/SA.gif)
-
-![SA (1)](tmp/SA (1).gif)
-
-![SA (2)](tmp/SA (2).gif)
-
-![SA (3)](tmp/SA (3).gif)
-
-![SA (4)](tmp/SA (4).gif)
 
