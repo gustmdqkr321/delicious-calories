@@ -220,15 +220,17 @@ fin
 
 ```
 ├── main.py
-├── start_page.py
-├── loginwindow.py
-│   ├── create_account────success/fail
-│   └── login─────────────success/fail
+├── start_page.py─────────────splash_screen_ui.py
+├── login_page.py
+│   ├── create_account────────success/fail
+│   └── login─────────────────success/fail
 └── main_page.py
-│   ├── profile image edit────
-│   ├── goal edit─────────────
+│   ├── profile image edit────profile_edit.py
+│   ├── goal edit─────────────goal_edit.py
 │   ├── Upload Food───────────image_upload.py
-│   └── Calender View─────────
+│   └── Calender View─────────아래 페이지와 연결
+└── calendar_page.py
+
 ────────────────────────────────────
 UI
 ────────────────────────────────────
@@ -236,6 +238,7 @@ splash_screen_ui.py
 login_ui.py
 createacc_ui.py
 main_page_ui.py
+calendarView_ui.py
 
 res_rc.py
 start_rc.py

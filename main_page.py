@@ -33,6 +33,7 @@ class MainWindow(QMainWindow):
         self.button_handle()
 
         user_name = db_instance.get_user_name()
+        print(user_name)
         self.ui.name.setText(user_name)
 
         self.profile_image_label = QLabel(self.ui.profile_image)
