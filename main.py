@@ -11,7 +11,7 @@ import subprocess
 start_path = "start_page.py"
 if __name__ == "__main__":
     subprocess.run(["python", start_path]) # 로딩 화면
-    
+    # testß
     app = QApplication(sys.argv)
     login_window = LoginWindow()
     
